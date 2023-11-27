@@ -51,8 +51,14 @@ public class TaskCatalog : BaseEntity //Each service catalog contains 1 or many 
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
     public string ServiceCatalogId { get; set; }
 }
+public class Customers : BaseEntity
+{
+    public string CustomerName { get; set; }
+}
 public class Lead:BaseEntity
 {
+    [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+    public string? CustomerId { get; set; }
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
     public string? AssignedTo { get; set; }
 }
