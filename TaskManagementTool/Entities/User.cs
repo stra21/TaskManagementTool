@@ -11,6 +11,7 @@ public class User :BaseEntity
     public string Email { get; set; }
     public string Password { get; set; }
     public bool IsVerified { get; set; }
+    public List<string> SkillSet { get; set; }
 }
 public class Organization : BaseEntity
 {
@@ -61,6 +62,7 @@ public class Lead:BaseEntity
     public string? CustomerId { get; set; }
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
     public string? AssignedTo { get; set; }
+    public string Requirements { get; set; }
 }
 
 public class Project :BaseEntity
@@ -77,14 +79,6 @@ public class Project :BaseEntity
     public int ProjectMethodology { get; set; }//Enum Methodologies: Scrum,Kanban,Sprints? Can be a future feature.
     public int ProjectStatus { get; set; }//Enum Status: Finished/InProgress/Cancelled.
 }
-public class ProjectCollaborators : BaseEntity
-{
-    [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-    public string UserId { get; set; }
-    [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-    public string ProjectId { get; set; }
-    public int Role { get; set; }//Enum RolesEnum: Owner/Manager/TeamLeader/TeamMember
-}
 
 public class ProjectService:BaseEntity
 {
@@ -92,8 +86,14 @@ public class ProjectService:BaseEntity
     public string ServiceDescription { get; set; }
     public DateTime? DueDate { get; set; }
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-    public string? ServiceId { get; set; }
-
+    public string ProjectId { get; set; }
+}
+public class ProjectCollaborators : BaseEntity
+{
+    [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+    public string UserId { get; set; }
+    [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+    public string ProjectId { get; set; }
 }
 public class ProjectServiceTask :BaseEntity
 {
@@ -104,6 +104,9 @@ public class ProjectServiceTask :BaseEntity
     public string? AssigneeId { get; set; }
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
     public string? ServiceId { get; set; }
+    [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+    public string? TaskCatalogId { get; set; }
+
     public int Status { get; set; }//Enum Task Statuses: Finished/InProgress/New/Rejected/Returned
 }
 public class TaskHistory:BaseEntity
@@ -111,7 +114,7 @@ public class TaskHistory:BaseEntity
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
     public string TaskId { get; set; }
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-    public string? AssigneeId { get; set; }
+    public string AssigneeId { get; set; }
     public int Status { get; set; }//Enum Task Statuses: Finished/InProgress/New/Rejected/Returned
 }
 public class Comment:BaseEntity
