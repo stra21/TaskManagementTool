@@ -26,8 +26,11 @@ public class Department : BaseEntity
 }
 public class Team : BaseEntity
 {
+    public string TeamName { get; set; }
     [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
     public string DepartmentId { get; set; }
+    [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+    public string? TeamLead { get; set; }
 }
 public class TeamMembers : BaseEntity
 {
